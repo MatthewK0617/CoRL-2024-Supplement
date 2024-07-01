@@ -47,7 +47,7 @@ def read_trajectory(db3_file_path):
     parser = BagFileParser(db3_file_path)
     U = parser.get_messages("/cf231/rpyt")
     X = parser.get_messages("/cf231/pose")
-
+    print(X[0])
     U_new = np.empty((0, 5)) # time, roll, pitch, yaw, thrust
     X_new = np.empty((0, 8)) # time, x, y, z, x_t, y_t, z_t, w
     indices = []
@@ -79,21 +79,21 @@ def read_trajectory(db3_file_path):
         indices.append(i) 
         # np.save(f"parsed_data/{db3_dirs[c][-18:]}", pose)
 
-    # fig = plt.figure(figsize=(10, 6))
-    # ax = fig.add_subplot(111, projection='3d')
+    fig = plt.figure(figsize=(10, 6))
+    ax = fig.add_subplot(111, projection='3d')
 
-    # ax.scatter(X_new[:, 1], X_new[:, 2], X_new[:, 3], c=indices, cmap='viridis', label='Trajectory Points')
+    ax.scatter(X_new[:, 1], X_new[:, 2], X_new[:, 3], c=indices, cmap='viridis', label='Trajectory Points')
 
-    # ax.set_xlabel('X')
-    # ax.set_ylabel('Y')
-    # ax.set_zlabel('Z')
-    # ax.set_title('3D Trajectory Plot')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_title('3D Trajectory Plot')
 
-    # cbar = plt.colorbar(ax.scatter(X_new[:, 1], X_new[:, 2], X_new[:, 3], c=indices, cmap='viridis'))
-    # cbar.set_label('Index (i)')
+    cbar = plt.colorbar(ax.scatter(X_new[:, 1], X_new[:, 2], X_new[:, 3], c=indices, cmap='viridis'))
+    cbar.set_label('Index (i)')
 
-    # # plt.savefig(f"{c}.png")
-    # plt.show()
+    # plt.savefig(f"{c}.png")
+    plt.show()
 
     return X_new, U_new
 
@@ -109,7 +109,7 @@ def parse_trajectories(db3_file_paths, db3_dirs):
     U_all = np.array(U_all)
     X_all = np.array(U_all)
     # np.savez(f"UX.npz", U=U_all, X=X_all) # append to a new np array and save that. wq
-    print(U_all.shape, X_all.shape)
+    # print(U_all.shape, X_all.shape)
 
 
 if __name__ == "__main__":

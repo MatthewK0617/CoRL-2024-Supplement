@@ -1,4 +1,4 @@
-# 2. cutting repeated parts of trajectories
+# 2. manually cutting repeated parts of trajectories
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -40,14 +40,14 @@ def plot(X_new, l, r):
 def read_npz(file_path, l, r):
     data = np.load(file_path)
     plot(data['X'], l, r)
-    np.savez(f"np_data_new/UX_4.npz", X=data['X'][l:r, :], U=data['U'])
+    # np.savez(f"np_data_new/UX_4.npz", X=data['X'][l:r, :], U=data['U'])
     # print(data['X'].shape)
     # print(data['U'].shape)
 
 if __name__ == "__main__":
         wd = os.getcwd() + '/np_data/'
         npz_file_paths, npz_dirs = find_npz_files(wd)
-        read_npz(npz_file_paths[4], 0, 3400)
+        read_npz(npz_file_paths[4], 499*3, 998*3)
         # parse_trajectories(npz_file_paths, npz_dirs)
         # read_trajectory(npz_file_paths[0])
         print()
